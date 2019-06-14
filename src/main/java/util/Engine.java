@@ -4,41 +4,32 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/*
-    Silnik powinien posiadać pola:
-    - stałą maxObroty
-    - aktualneObroty
-    oraz metody:
-    - uruchom() (wypisuje na ekranie napis "Silnik: uruchamiam", ustawia obroty na 1000)
-    - zgaś() (wypisuje na ekranie napis "Silnik: zatrzymuję", ustawia obroty na 1000)
-    - dodajGazu() (dodaje do aktualnych obrotów 500, wypisuje na ekranie napis "Silnik: daję gazu! Aktualne obroty: [aktualneObroty]",
-    jednocześnie sprawdza czy nie przekroczone zostały maksymalne obroty. Jeśli tak wypisuje na ekran "Za bardzo gazujesz!! Zaraz wybuchnę!!!")
 
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Engine {
 
-    private static final int maxRpm = 5000;
-    private int currentRpm;
+    private static final int MAX_RPM = 5000;
+    private static final int INCREASE_RPM = 500;
+    private int currentRpm = 0;
 
-    private void turnOn(){
+    public void turnOn(){
         System.out.println("Silnik: uruchamiam");
         setCurrentRpm(1000);
     }
 
-    private void turnOff(){
+    public void turnOff(){
         System.out.println("Silnik: zatrzymuję");
         setCurrentRpm(1000);
     }
 
-    private void increasePower(){
-        setCurrentRpm(getCurrentRpm() + 500);
-        if (getCurrentRpm()>maxRpm){
-            setCurrentRpm(maxRpm);
-            System.out.println("Za bardzo gazujesz!! Zaraz wybuchnę!!! + \n"
-                                + " Osiągnięto maksimum obrotów: " + maxRpm);
+    public void increasePower(){
+        setCurrentRpm(getCurrentRpm() + INCREASE_RPM);
+        if (getCurrentRpm()> MAX_RPM){
+            setCurrentRpm(MAX_RPM);
+            System.out.println("Za bardzo gazujesz!! Zaraz wybuchnę!!!\n"
+                                + "Osiągnięto maksimum obrotów: " + MAX_RPM);
 
         }else {
             System.out.println("Silnik: daję gazu! Aktualne obroty: " + getCurrentRpm());
